@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Movie</h4>
+    <h4>Movie#@Model.Id</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -38,5 +38,20 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a> |
+
+    @{
+        if ((bool)ViewData["Relleno"])
+        {
+            <a asp-action="Details" asp-route-id="@Model.Id" asp-route-marca="true" asp-route-TF="false">Prev</a> 
+            <span>|</span><span>#</span>@Model.Id;<span>|</span>
+            <a asp-action="Details" asp-route-id="@Model.Id" asp-route-marca="true" asp-route-TF="true">Next</a>
+        }
+        else
+        {
+            <a asp-action="Details" asp-route-id="@Model.Id" asp-route-TF="false">Prev</a>
+            <a asp-action="Details" asp-route-id="@Model.Id" asp-route-marca="false" asp-route-TF="true">Next</a>
+        }
+    }
+
 </div>

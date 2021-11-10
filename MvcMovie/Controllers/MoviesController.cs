@@ -51,20 +51,30 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, bool marca, bool TF)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id);
+            if (TF)
+            {
+                id++;
+            }
+            else
+            {
+                id--;
+            }
+            if (id == 0)
+            {
+                id = 1;
+            }
+            var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
                 return NotFound();
             }
-
+            ViewData["Relleno"] = marca;
             return View(movie);
         }
 
