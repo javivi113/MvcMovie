@@ -51,20 +51,39 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, bool marca, bool TF)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            var prev = (from x in _context.Movie where x.Id < id orderby x.Id descending select x).FirstOrDefault();
+            var next = (from x in _context.Movie where x.Id > id orderby x.Id ascending select x).FirstOrDefault();
+            if (prev != null)
+            {
+                ViewData["prev"] = prev.Id;
+                ViewData["BlokearPrev"] = true;
+            }
+            else
+            {
+                ViewData["BlokearPrev"] = false;
+            }
+            if (next != null)
+            {
+                ViewData["next"] = next.Id;
+                ViewData["BlokearNext"] = true;
+            }
+            else
+            {
+                ViewData["BlokearNext"] = false;
 
-            var movie = await _context.Movie
-                .FirstOrDefaultAsync(m => m.Id == id);
+            }
+            var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {
                 return NotFound();
             }
-
+            ViewData["Relleno"] = marca;
             return View(movie);
         }
 

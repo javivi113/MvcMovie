@@ -29,6 +29,24 @@ namespace MvcMovie.Models
                         Rating = "R",
                         Price = 7.99M
                     },
+                     new Movie
+                     {
+                         Id = 1,
+                         Title = "ScaryMovie 1",
+                         ReleaseDate = DateTime.Parse("1989-2-12"),
+                         Genre = "Romantic Comedy",
+                         Rating = "R",
+                         Price = 7.99M
+                     },
+                     new Movie
+                     {
+                         Id = 2,
+                         Title = "Scary Movie 2",
+                         ReleaseDate = DateTime.Parse("1989-2-12"),
+                         Genre = "Romantic Comedy",
+                         Rating = "R",
+                         Price = 7.99M
+                     },
 
                     new Movie
                     {
