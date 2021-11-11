@@ -53,9 +53,11 @@ namespace MvcMovie.Controllers
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id, bool marca, bool TF)
         {
+            var first = (from x in _context.Movie orderby x.Id select x).FirstOrDefault();
             if (id == null)
             {
-                return NotFound();
+                id = first.Id;
+                ViewData["primero"] = id;
             }
             var prev = (from x in _context.Movie where x.Id < id orderby x.Id descending select x).FirstOrDefault();
             var next = (from x in _context.Movie where x.Id > id orderby x.Id ascending select x).FirstOrDefault();
